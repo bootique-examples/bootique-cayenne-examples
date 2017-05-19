@@ -16,8 +16,8 @@ See in addition [an example for LinkRest](https://github.com/bootique-examples/b
       
 ## Build the Demo
       
-    Here is how to build it:
-
+Here is how to build it:
+        
         git clone git@github.com:bootique-examples/bootique-cayenne-demo.git
         cd bootique-cayenne-demo
         mvn package
@@ -56,7 +56,7 @@ Output:
     
 To listen on events use Cayenne [Lifecycle Events](https://cayenne.apache.org/docs/4.0/cayenne-guide/lifecycle-events.html).
  
-Example provide post persist listener (see logs):
+The example provides post persist listener (see logs):
     
     NEW ARTICLE {<ObjectId:Article, id=3>; committed; [domain=>{<ObjectId:Domain, id=2>}; publishedOn=>Fri May 19 15:33:34 MSK 2017; title=>LinkRest Presentation; body=>Here is how to use LinkRest; tags=>(..)]} 
 
