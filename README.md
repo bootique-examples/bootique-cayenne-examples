@@ -40,7 +40,18 @@ Now you can check the options available in your app:
     
     -s, --select                                    Select data from Derby db
  
-Configure database settings in YAML file *run.yml*.   
+Configure database settings in YAML file *run.yml*:
+    
+    jdbc:
+        derby:
+        url: jdbc:derby:target/demodb;create=true
+        driverClassName: org.apache.derby.jdbc.EmbeddedDriver
+        initialSize: 1
+
+    cayenne:
+        datasource: derby
+        createSchema: true
+
 
 Insert initial data into Derby database via *--insert* command:
     

@@ -29,7 +29,7 @@ public class SelectDataCommand extends CommandWithMetadata {
     }
 
     private static CommandMetadata createMetadata() {
-        return CommandMetadata.builder(InsertDataCommand.class).name("select").shortName('s').description("Select data from Derby db").build();
+        return CommandMetadata.builder(InsertDataCommand.class).name("select").shortName('s').description("Select data from db").build();
     }
 
     @Override
