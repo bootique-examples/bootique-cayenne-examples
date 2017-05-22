@@ -17,8 +17,8 @@ public class Application implements Module {
     public void configure(Binder binder) {
         BQCoreModule.extend(binder).addCommand(InsertDataCommand.class).addCommand(SelectDataCommand.class);
 
-        //here is an option of overriding of Cayenne module settings and
         CayenneModule.extend(binder).addModule(cayenneBinder -> {
+            //here is an option of overriding of Cayenne module settings
             ServerModule.contributeProperties(cayenneBinder).put(Constants.JDBC_MAX_QUEUE_WAIT_TIME, "0");
         }).addListener(PostPersistListener.class);
 
