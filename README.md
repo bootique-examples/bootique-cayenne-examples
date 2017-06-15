@@ -48,7 +48,8 @@ Firstly, specify connection settings (url, driver, etc.) in *config.yml* to be u
 Rely on Bootique to get connection to your db. Mixing declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
  
 Look though the configs: 
-**config.yml**. 
+
+**config.yml**
     
     jdbc:
       mysql:
@@ -74,7 +75,7 @@ To escape MySQL database staff overwrite *config.yml* for Derby db:
       datasource: derby
       createSchema: true
 
-**cayenne-myproject.xml**:
+**cayenne-myproject.xml**
 
     <?xml version="1.0" encoding="utf-8"?>
     <domain project-version="9">
