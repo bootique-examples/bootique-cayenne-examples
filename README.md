@@ -40,8 +40,15 @@ Now you can check the options available in your app:
     
           -s, --select
                Select data from db
+
+To execute the example you should have a database to connect with and schema 'cayenne' in it. 
+MySQL is used for the example.
+
+Firstly, specify connection settings (url, driver, etc.) in *config.yml* to be used by Bootique, having left Cayenne project without a data node. 
+Rely on Bootique to get connection to your db. Mixing declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
  
-Provide Bootique configuration **config.yml**:
+Look though the configs: 
+**config.yml**. 
     
     jdbc:
       mysql:
@@ -54,8 +61,20 @@ Provide Bootique configuration **config.yml**:
     cayenne:
       datasource: mysql
       createSchema: true
+ 
+To escape MySQL database staff overwrite *config.yml* for Derby db:
 
-Cayenne configuration **cayenne-myproject.xml**:
+    jdbc:
+      derby:
+        url: jdbc:derby:target/demodb;create=true
+        driverClassName: org.apache.derby.jdbc.EmbeddedDriver
+        initialSize: 1
+    
+    cayenne:
+      datasource: derby
+      createSchema: true
+
+**cayenne-myproject.xml**:
 
     <?xml version="1.0" encoding="utf-8"?>
     <domain project-version="9">
@@ -65,14 +84,14 @@ Cayenne configuration **cayenne-myproject.xml**:
     
     </domain>
 
-**Note:** be cautious with Cayenne project name since non-default Cayenne project name, e.g. 'cayenne-myproject.xml' requires an explicit declaration via CayenneModule.extend(..).
+**Note:** be cautious with Cayenne project name since non-default Cayenne project name, e.g. 'cayenne-myproject.xml', requires an explicit declaration via CayenneModule.extend(..).
 The default one 'cayenne-project.xml' works out of the box.
 
 Insert data into database via *--insert* command:
     
     java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --insert
 
-Simple select via *--select* command:
+Simple selection via *--select* command:
 
     java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --select
 
