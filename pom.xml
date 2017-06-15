@@ -34,9 +34,14 @@
                 <type>pom</type>
             </dependency>
             <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>6.0.6</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.derby</groupId>
                 <artifactId>derby</artifactId>
-                <version>10.10.1.1</version>
+                <version>10.13.1.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -58,10 +63,17 @@
             <groupId>io.bootique.logback</groupId>
             <artifactId>bootique-logback</artifactId>
         </dependency>
+
+        <!--DB drivers-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
