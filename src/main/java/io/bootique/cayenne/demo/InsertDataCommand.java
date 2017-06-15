@@ -11,9 +11,8 @@ import io.bootique.command.CommandWithMetadata;
 import io.bootique.meta.application.CommandMetadata;
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.configuration.server.ServerRuntime;
-import org.apache.commons.lang.time.DateUtils;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class InsertDataCommand extends CommandWithMetadata {
 
@@ -43,12 +42,12 @@ public class InsertDataCommand extends CommandWithMetadata {
         Article linkRestArticle = context.newObject(Article.class);
         linkRestArticle.setTitle("LinkRest Presentation");
         linkRestArticle.setBody("Here is how to use LinkRest");
-        linkRestArticle.setPublishedOn(new Date());
+        linkRestArticle.setPublishedOn(LocalDateTime.now());
 
         Article cayenneArticle = context.newObject(Article.class);
         cayenneArticle.setTitle("Cayenne Goodies");
         cayenneArticle.setBody("This is an article about Apache Cayenne");
-        cayenneArticle.setPublishedOn(DateUtils.addDays(new Date(), -1));
+        cayenneArticle.setPublishedOn(LocalDateTime.now());
 
         Tag linkRestTag = context.newObject(Tag.class);
         linkRestTag.setName("LinkRest");

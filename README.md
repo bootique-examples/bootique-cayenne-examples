@@ -2,10 +2,7 @@
 # bootique-cayenne-demo
 
 A simple example that explains how to use [Cayenne](https://cayenne.apache.org) integrated for [Bootique](https://bootique.io).
-Here [Cayenne Commands](http://bootique.io/docs/0/bootique-docs/index.html#d50e385) are used to inject Cayenne ServerRuntime.
-It can be injected basing on your task (e.g. in web resource).
-See in addition [an example for LinkRest](https://github.com/bootique-examples/bootique-linkrest-demo) using Cayenne.
-   
+
 *For additional help/questions about this example send a message to
 [Bootique forum](https://groups.google.com/forum/#!forum/bootique-user).*
    
@@ -28,47 +25,65 @@ Now you can check the options available in your app:
    
     java -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar
     
-    Option                                          Description
-    ------                                          -----------    
-    -c yaml_location, --config=yaml_location        Specifies YAML config location, which can be a file path or a URL.
+    OPTIONS
+          -c yaml_location, --config=yaml_location
+               Specifies YAML config location, which can be a file path or a URL.
     
-    -h, --help                                      Prints this message.
+          -h, --help
+               Prints this message.
     
-    -H, --help-config                               Prints information about application modules and their configuration options.
+          -H, --help-config
+               Prints information about application modules and their configuration options.
     
-    -i, --insert                                    Insert initial data into Derby db
+          -i, --insert
+               Insert initial data into db
     
-    -s, --select                                    Select data from Derby db
+          -s, --select
+               Select data from db
  
-Configure database settings in YAML file *run.yml*:
+Provide Bootique configuration **config.yml**:
     
     jdbc:
-        derby:
-        url: jdbc:derby:target/demodb;create=true
-        driverClassName: org.apache.derby.jdbc.EmbeddedDriver
+      mysql:
+        url: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
+        driverClassName: com.mysql.jdbc.Driver
         initialSize: 1
-
-    cayenne:
-        datasource: derby
-        createSchema: true
-
-
-Insert initial data into Derby database via *--insert* command:
+        username: root
+        password:
     
-    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=run.yml --insert
+    cayenne:
+      datasource: mysql
+      createSchema: true
+
+Cayenne configuration **cayenne-myproject.xml**:
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <domain project-version="9">
+        <map name="datamap"/>
+    
+        <!--No Cayenne data node - config.yml is used!-->
+    
+    </domain>
+
+**Note:** be cautious with Cayenne project name since non-default Cayenne project name, e.g. 'cayenne-myproject.xml' requires an explicit declaration via CayenneModule.extend(..).
+The default one 'cayenne-project.xml' works out of the box.
+
+Insert data into database via *--insert* command:
+    
+    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --insert
 
 Simple select via *--select* command:
 
-    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=run.yml --select
+    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --select
 
 Output:
  
-    INFO  [2017-05-19 12:36:04,060] main i.b.c.d.SelectDataCommand: Articles count on domain mysite1.example.org: 2
+    ...
+        INFO  [2017-05-19 12:36:04,060] main i.b.c.d.SelectDataCommand: Articles count on domain mysite1.example.org: 2
     
-To listen on events use Cayenne [Lifecycle Events](https://cayenne.apache.org/docs/4.0/cayenne-guide/lifecycle-events.html).
- 
-The example provides post persist listener (see logs):
+To listen on events use Cayenne [Lifecycle Events](https://cayenne.apache.org/docs/4.0/cayenne-guide/lifecycle-events.html). The example provides post persist listener (see logs):
     
-    NEW ARTICLE {<ObjectId:Article, id=3>; committed; [domain=>{<ObjectId:Domain, id=2>}; publishedOn=>Fri May 19 15:33:34 MSK 2017; title=>LinkRest Presentation; body=>Here is how to use LinkRest; tags=>(..)]} 
+    ...
+        NEW ARTICLE {<ObjectId:Article, id=3>; committed; [domain=>{<ObjectId:Domain, id=2>}; publishedOn=>Fri May 19 15:33:34 MSK 2017; title=>LinkRest Presentation; body=>Here is how to use LinkRest; tags=>(..)]} 
 
 
