@@ -44,8 +44,8 @@ Now you can check the options available in your app:
 To execute the example you should have a database to connect with and schema 'cayenne' in it. 
 MySQL is used for the example.
 
-Firstly, specify connection settings (url, driver, etc.) in *config.yml* to be used by Bootique, having left Cayenne project without a data node. 
-Rely on Bootique to get connection to your db. Mixing declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
+Then specify connection settings (url, driver, etc.) in *config.yml* to be used by Bootique, having left Cayenne project without a data node. 
+Rely on Bootique to get connection to your db. Mixing of declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
  
 Look though the configs: 
 
@@ -63,7 +63,7 @@ Look though the configs:
       datasource: mysql
       createSchema: true
  
-To escape MySQL database staff overwrite *config.yml* for Derby db:
+To escape MySQL database stuff overwrite *config.yml* for Derby db:
 
     jdbc:
       derby:
