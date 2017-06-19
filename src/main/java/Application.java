@@ -1,10 +1,11 @@
-package io.bootique.cayenne.demo;
-
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import io.bootique.BQCoreModule;
 import io.bootique.Bootique;
 import io.bootique.cayenne.CayenneModule;
+import io.bootique.cayenne.demo.InsertDataCommand;
+import io.bootique.cayenne.demo.PostPersistListener;
+import io.bootique.cayenne.demo.SelectDataCommand;
 import org.apache.cayenne.configuration.Constants;
 import org.apache.cayenne.configuration.server.ServerModule;
 
