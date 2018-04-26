@@ -29,7 +29,7 @@
             <dependency>
                 <groupId>io.bootique.bom</groupId>
                 <artifactId>bootique-bom</artifactId>
-                <version>0.22</version>
+                <version>0.25</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -57,7 +57,7 @@
         </dependency>
         <dependency>
             <groupId>io.bootique.jdbc</groupId>
-            <artifactId>bootique-jdbc</artifactId>
+            <artifactId>bootique-jdbc-hikaricp</artifactId>
         </dependency>
         <dependency>
             <groupId>io.bootique.logback</groupId>

@@ -53,9 +53,10 @@ Look though the configs:
     
     jdbc:
       mysql:
-        url: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
+        jdbcUrl: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
         driverClassName: com.mysql.jdbc.Driver
-        initialSize: 1
+        maximumPoolSize: 1
+        minimumIdle: 1
         username: root
         password:
     
@@ -67,9 +68,10 @@ To escape MySQL database stuff overwrite *config.yml* for Derby db:
 
     jdbc:
       derby:
-        url: jdbc:derby:target/demodb;create=true
+        jdbcUrl: jdbc:derby:target/demodb;create=true
         driverClassName: org.apache.derby.jdbc.EmbeddedDriver
-        initialSize: 1
+        maximumPoolSize: 1
+        minimumIdle: 1
     
     cayenne:
       datasource: derby

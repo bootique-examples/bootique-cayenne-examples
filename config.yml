@@ -1,8 +1,9 @@
 jdbc:
   mysql:
-    url: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
+    jdbcUrl: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
     driverClassName: com.mysql.jdbc.Driver
-    initialSize: 1
+    maximumPoolSize: 1
+    minimumIdle: 1
     username: root
     password:
 

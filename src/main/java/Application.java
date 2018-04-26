@@ -11,7 +11,7 @@ import org.apache.cayenne.configuration.server.ServerModule;
 
 public class Application implements Module {
     public static final void main(String[] args) {
-        Bootique.app(args).module(Application.class).autoLoadModules().run();
+        Bootique.app(args).module(Application.class).autoLoadModules().exec().exit();
     }
 
     @Override
