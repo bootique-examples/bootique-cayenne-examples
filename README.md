@@ -23,7 +23,7 @@ Here is how to build it:
 
 Now you can check the options available in your app:
    
-    java -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar
+    java -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar
     
     OPTIONS
           -c yaml_location, --config=yaml_location
@@ -92,11 +92,11 @@ The default one 'cayenne-project.xml' works out of the box.
 
 Insert data into database via *--insert* command:
     
-    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --insert
+    java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --config=config.yml --insert
 
 Simple selection via *--select* command:
 
-    java  -jar target/bootique.cayenne.demo-1.0-SNAPSHOT.jar --config=config.yml --select
+    java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --config=config.yml --select
 
 Output:
  
