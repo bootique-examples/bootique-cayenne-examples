@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>io.bootique.cayenne.demo</groupId>
-    <artifactId>bootique.cayenne.demo</artifactId>
+    <artifactId>bootique-cayenne-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Bootique + Cayenne Demo</name>
