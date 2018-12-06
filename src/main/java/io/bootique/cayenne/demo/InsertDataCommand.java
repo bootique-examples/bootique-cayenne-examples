@@ -25,8 +25,10 @@ public class InsertDataCommand extends CommandWithMetadata {
     }
 
     private static CommandMetadata createMetadata() {
-        return CommandMetadata.builder(InsertDataCommand.class).name("insert").shortName('i').
-                description("Insert initial data into db").build();
+        return CommandMetadata.builder(InsertDataCommand.class)
+                .name("insert")
+                .description("Insert initial data into db")
+                .build();
     }
 
     @Override

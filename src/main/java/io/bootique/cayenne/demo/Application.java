@@ -9,7 +9,8 @@ import org.apache.cayenne.configuration.Constants;
 import org.apache.cayenne.configuration.server.ServerModule;
 
 public class Application implements Module {
-    public static final void main(String[] args) {
+
+    public static void main(String[] args) {
         Bootique.app(args)
                 .module(Application.class)
                 .autoLoadModules()
@@ -26,9 +27,9 @@ public class Application implements Module {
         CayenneModule.extend(binder)
                 // non-default Cayenne project name requires an explicit declaration
                 .addProject("cayenne-myproject.xml")
-                .addModule(cayenneBinder -> {
-                    // override Cayenne module settings, e.g. this one
-                    ServerModule.contributeProperties(cayenneBinder).put(Constants.JDBC_MAX_QUEUE_WAIT_TIME, "0");
-                }).addListener(PostPersistListener.class);
+                .addModule(cayenneBinder
+                        // override Cayenne module settings, e.g. this one
+                        -> ServerModule.contributeProperties(cayenneBinder).put(Constants.JDBC_MAX_QUEUE_WAIT_TIME, "0"))
+                .addListener(PostPersistListener.class);
     }
 }

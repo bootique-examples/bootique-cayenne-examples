@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SelectDataCommand extends CommandWithMetadata {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(SelectDataCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SelectDataCommand.class);
 
     private Provider<ServerRuntime> runtimeProvider;
 
@@ -29,7 +29,10 @@ public class SelectDataCommand extends CommandWithMetadata {
     }
 
     private static CommandMetadata createMetadata() {
-        return CommandMetadata.builder(InsertDataCommand.class).name("select").shortName('s').description("Select data from db").build();
+        return CommandMetadata.builder(SelectDataCommand.class)
+                .name("select")
+                .description("Select data from db")
+                .build();
     }
 
     @Override
