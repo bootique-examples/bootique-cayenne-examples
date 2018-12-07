@@ -1,4 +1,7 @@
+.classpath
+.project
 target
+.settings
 *.iml
 .idea
 derby.log
