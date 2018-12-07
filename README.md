@@ -1,7 +1,7 @@
   [![Build Status](https://travis-ci.org/bootique-examples/bootique-cayenne-demo.svg)](https://travis-ci.org/bootique-examples/bootique-cayenne-demo)
 # bootique-cayenne-demo
 
-A simple example that explains how to use [Cayenne](https://cayenne.apache.org) integrated for [Bootique](https://bootique.io).
+A simple example that explains how to use [Cayenne ORM](https://cayenne.apache.org) integrated for [Bootique](https://bootique.io).
 
 *For additional help/questions about this example send a message to
 [Bootique forum](https://groups.google.com/forum/#!forum/bootique-user).*
@@ -15,19 +15,28 @@ A simple example that explains how to use [Cayenne](https://cayenne.apache.org) 
       
 Here is how to build it:
         
-        git clone git@github.com:bootique-examples/bootique-cayenne-demo.git
-        cd bootique-cayenne-demo
-        mvn package
+    $ git clone git@github.com:bootique-examples/bootique-cayenne-demo.git
+    $ cd bootique-cayenne-demo
+    $ mvn package
       
 ## Run the Demo
 
 Now you can check the options available in your app:
    
-    java -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar
+    $ java -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar
+    
+    NAME
+          bootique-cayenne-demo-1.0-SNAPSHOT.jar
     
     OPTIONS
           -c yaml_location, --config=yaml_location
                Specifies YAML config location, which can be a file path or a URL.
+    
+          -r [true | false], --create-schema[=true | false]
+               Create schema. False by default. Optional.
+    
+          -d [derby, mysql], --datasource[=derby, mysql]
+               Select datasource to use. By default 'mysql' is used. Optional.
     
           -h, --help
                Prints this message.
@@ -41,71 +50,37 @@ Now you can check the options available in your app:
           -s, --select
                Select data from db
 
-To execute the example you should have a database to connect with and schema 'cayenne' in it. 
-MySQL is used for the example.
+To execute the example you should have a database to connect with. You can use Docker to start MySQL or use embedded Derby data source.
 
-Then specify connection settings (url, driver, etc.) in *config.yml* to be used by Bootique, having left Cayenne project without a data node. 
-Rely on Bootique to get connection to your db. Mixing of declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
+Here is docker command to start MySQL instance that can be used for this example: 
  
-Look though the configs: 
+    $ docker run --name cayenne-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=cayenne -e MYSQL_DATABASE=cayenne -d mysql:8.0
+          
+This example relies on Bootique to provide data source to Cayenne runtime. 
+Mixing of declarations of data sources in Bootique and Cayenne is allowed but not recommended. 
 
-**config.yml**
-    
-    jdbc:
-      mysql:
-        jdbcUrl: jdbc:mysql://localhost:3306/cayenne?connectTimeout=0&autoReconnect=true
-        driverClassName: com.mysql.jdbc.Driver
-        maximumPoolSize: 1
-        minimumIdle: 1
-        username: root
-        password:
-    
-    cayenne:
-      datasource: mysql
-      createSchema: true
- 
-To escape MySQL database stuff overwrite *config.yml* for Derby db:
+**Note:** be cautious with Cayenne project name since non-default Cayenne project name, e.g. 'cayenne-myproject.xml', requires an explicit declaration via `CayenneModule.extend(..)`.
+The default one `cayenne-project.xml` works out of the box.
 
-    jdbc:
-      derby:
-        jdbcUrl: jdbc:derby:target/demodb;create=true
-        driverClassName: org.apache.derby.jdbc.EmbeddedDriver
-        maximumPoolSize: 1
-        minimumIdle: 1
-    
-    cayenne:
-      datasource: derby
-      createSchema: true
-
-**cayenne-myproject.xml**
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <domain project-version="9">
-        <map name="datamap"/>
-    
-        <!--No Cayenne data node - config.yml is used!-->
-    
-    </domain>
-
-**Note:** be cautious with Cayenne project name since non-default Cayenne project name, e.g. 'cayenne-myproject.xml', requires an explicit declaration via CayenneModule.extend(..).
-The default one 'cayenne-project.xml' works out of the box.
+If you want to use Derby DB instead of MySQL just skip Docker step and add `--datasource=derby` option to the commands bellow.
 
 Insert data into database via *--insert* command:
     
-    java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --config=config.yml --insert
+    $ java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --insert --create-schema    
 
 Simple selection via *--select* command:
 
-    java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --config=config.yml --select
+    $ java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --select
 
 Output:
  
     ...
-        INFO  [2017-05-19 12:36:04,060] main i.b.c.d.SelectDataCommand: Articles count on domain mysite1.example.org: 2
+    INFO  [2017-05-19 12:36:04,060] main i.b.c.d.SelectDataCommand: Articles count on domain mysite1.example.org: 2
+    ...
     
-To listen on events use Cayenne [Lifecycle Events](https://cayenne.apache.org/docs/4.0/cayenne-guide/lifecycle-events.html). The example provides post persist listener (see logs):
+The example provides post persist [listener](https://cayenne.apache.org/docs/4.0/cayenne-guide/lifecycle-events.html) (see logs):
     
     ...
-        NEW ARTICLE {<ObjectId:Article, id=3>; committed; [domain=>{<ObjectId:Domain, id=2>}; publishedOn=>Fri May 19 15:33:34 MSK 2017; title=>LinkRest Presentation; body=>Here is how to use LinkRest; tags=>(..)]} 
-
+    NEW ARTICLE {<ObjectId:Article, id=3>; committed; [domain=>{<ObjectId:Domain, id=2>}; publishedOn=>Fri May 19 15:33:34 MSK 2017; title=>LinkRest Presentation; body=>Here is how to use LinkRest; tags=>(..)]} 
+    ...
 

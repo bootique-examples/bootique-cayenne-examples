@@ -1,6 +1,6 @@
-package io.bootique.cayenne;
+package io.bootique.cayenne.demo.model;
 
-import io.bootique.cayenne.auto._Domain;
+import io.bootique.cayenne.demo.model.auto._Domain;
 
 public class Domain extends _Domain {
 

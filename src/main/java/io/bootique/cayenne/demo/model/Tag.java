@@ -1,6 +1,6 @@
-package io.bootique.cayenne;
+package io.bootique.cayenne.demo.model;
 
-import io.bootique.cayenne.auto._Tag;
+import io.bootique.cayenne.demo.model.auto._Tag;
 
 public class Tag extends _Tag {
 

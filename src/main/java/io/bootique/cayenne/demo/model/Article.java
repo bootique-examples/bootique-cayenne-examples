@@ -1,6 +1,6 @@
-package io.bootique.cayenne;
+package io.bootique.cayenne.demo.model;
 
-import io.bootique.cayenne.auto._Article;
+import io.bootique.cayenne.demo.model.auto._Article;
 
 public class Article extends _Article {
 

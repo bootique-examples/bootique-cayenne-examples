@@ -2,9 +2,9 @@ package io.bootique.cayenne.demo;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.bootique.cayenne.Article;
-import io.bootique.cayenne.Domain;
-import io.bootique.cayenne.Tag;
+import io.bootique.cayenne.demo.model.Article;
+import io.bootique.cayenne.demo.model.Domain;
+import io.bootique.cayenne.demo.model.Tag;
 import io.bootique.cli.Cli;
 import io.bootique.command.CommandOutcome;
 import io.bootique.command.CommandWithMetadata;

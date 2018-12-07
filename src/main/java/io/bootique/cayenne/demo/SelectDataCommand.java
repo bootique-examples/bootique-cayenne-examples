@@ -2,8 +2,8 @@ package io.bootique.cayenne.demo;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.bootique.cayenne.Article;
-import io.bootique.cayenne.Domain;
+import io.bootique.cayenne.demo.model.Article;
+import io.bootique.cayenne.demo.model.Domain;
 import io.bootique.cli.Cli;
 import io.bootique.command.CommandOutcome;
 import io.bootique.command.CommandWithMetadata;
@@ -40,11 +40,11 @@ public class SelectDataCommand extends CommandWithMetadata {
         ServerRuntime runtime = runtimeProvider.get();
 
         ObjectContext context = runtime.newContext();
-        List<Article> articleList = ObjectSelect.query(Article.class)
+        Long count = ObjectSelect.query(Article.class)
                 .where(Article.DOMAIN.dot(Domain.VHOST).eq(Domain.DEFAULT_HOST))
-                .select(context);
+                .selectCount(context);
 
-        LOGGER.info("Articles count on domain {}: {}", Domain.DEFAULT_HOST, articleList.size());
+        LOGGER.info("Articles count on domain {}: {}", Domain.DEFAULT_HOST, count);
 
         return CommandOutcome.succeeded();
     }
