@@ -23,10 +23,10 @@ Here is how to build it:
 
 Now you can check the options available in your app:
    
-    $ java -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar
+    $ java -jar target/bootique-cayenne-demo-2.0.jar
     
     NAME
-          bootique-cayenne-demo-1.0-SNAPSHOT.jar
+          bootique-cayenne-demo-2.0.jar
     
     OPTIONS
           -c yaml_location, --config=yaml_location
@@ -66,11 +66,11 @@ If you want to use Derby DB instead of MySQL just skip Docker step and add `--da
 
 Insert data into database via *--insert* command:
     
-    $ java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --insert --create-schema    
+    $ java -jar target/bootique-cayenne-demo-2.0.jar --insert --create-schema    
 
 Simple selection via *--select* command:
 
-    $ java  -jar target/bootique-cayenne-demo-1.0-SNAPSHOT.jar --select
+    $ java -jar target/bootique-cayenne-demo-2.0.jar --select
 
 Output:
  
