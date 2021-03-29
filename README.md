@@ -1,4 +1,4 @@
-  [![Build Status](https://travis-ci.org/bootique-examples/bootique-cayenne-demo.svg)](https://travis-ci.org/bootique-examples/bootique-cayenne-demo)
+[![verify](https://github.com/bootique-examples/bootique-cayenne-demo/actions/workflows/verify.yml/badge.svg)](https://github.com/bootique-examples/bootique-cayenne-demo/actions/workflows/verify.yml)
 # bootique-cayenne-demo
 
 A simple example that explains how to use [Cayenne ORM](https://cayenne.apache.org) integrated for [Bootique](https://bootique.io).
