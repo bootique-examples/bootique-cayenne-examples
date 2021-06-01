@@ -1,14 +1,14 @@
 package io.bootique.cayenne.demo;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
 import io.bootique.BQCoreModule;
 import io.bootique.Bootique;
 import io.bootique.cayenne.CayenneModule;
+import io.bootique.di.BQModule;
+import io.bootique.di.Binder;
 import io.bootique.meta.application.OptionMetadata;
 import org.apache.cayenne.configuration.server.ServerModule;
 
-public class Application implements Module {
+public class Application implements BQModule {
 
     private static final String DATASOURCE_OPTION = "datasource";
     private static final String CREATE_SCHEMA_OPTION = "create-schema";

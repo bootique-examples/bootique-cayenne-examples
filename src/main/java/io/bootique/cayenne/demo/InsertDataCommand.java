@@ -1,7 +1,5 @@
 package io.bootique.cayenne.demo;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import io.bootique.cayenne.demo.model.Article;
 import io.bootique.cayenne.demo.model.Domain;
 import io.bootique.cayenne.demo.model.Tag;
@@ -12,6 +10,8 @@ import io.bootique.meta.application.CommandMetadata;
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.configuration.server.ServerRuntime;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
 import java.time.LocalDateTime;
 
 public class InsertDataCommand extends CommandWithMetadata {
