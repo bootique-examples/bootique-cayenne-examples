@@ -1,7 +1,5 @@
 package io.bootique.cayenne.demo;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import io.bootique.cayenne.demo.model.Article;
 import io.bootique.cayenne.demo.model.Domain;
 import io.bootique.cli.Cli;
@@ -14,7 +12,8 @@ import org.apache.cayenne.query.ObjectSelect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class SelectDataCommand extends CommandWithMetadata {
 
