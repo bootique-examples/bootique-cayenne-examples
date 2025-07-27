@@ -65,15 +65,16 @@ OPTIONS
            Prints this message.
 
       -H [prefix], --help-config[=prefix]
-           Prints information about application modules and their configuration options. Optionally, you can 
-           provide a 'prefix' argument to print only the specified config.
+           Prints information about application modules and their configuration options. 
+           Optionally, you can provide a 'prefix' argument to print only the specified 
+           config.
 
       -i, --insert
            Insert test data the DB
 ```
 
-Notice how there's no short version of either `--count`, or `--config` flags, as both start with the same letter, and 
-the full name should be used to avoid ambiguity.
+Notice how there's no short version of either `--count` or `--config` flags, as both start with the same letter `c`, 
+and the full name should be used to avoid ambiguity.
 
 Run the `-i` (or `--insert`) command to create some sample data in the DB. DB location and login credential are
 specified in the provided `config.yml`.
