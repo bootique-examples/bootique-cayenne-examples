@@ -4,20 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.bootique.parent</groupId>
-        <artifactId>bootique-parent</artifactId>
-        <version>0.13</version>
-    </parent>
-
-    <groupId>io.bootique.cayenne.demo</groupId>
-    <artifactId>bootique-cayenne-demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <name>Bootique + Cayenne Demo</name>
+    <groupId>io.bootique.examples.cayenne</groupId>
+    <artifactId>bootique-cayenne-examples</artifactId>
+    <packaging>jar</packaging>
+    <version>3.0</version>
 
     <properties>
-        <main.class>io.bootique.cayenne.demo.Application</main.class>
+        <maven.compiler.release>11</maven.compiler.release>
+
+        <bootique.version>3.0-RC1</bootique.version>
+        <postgres.driver.version>42.7.3</postgres.driver.version>
+
+        <main.class>io.bootique.examples.cayenne.App</main.class>
     </properties>
 
     <dependencyManagement>
@@ -25,31 +23,22 @@
             <dependency>
                 <groupId>io.bootique.bom</groupId>
                 <artifactId>bootique-bom</artifactId>
-                <version>1.0.RC1</version>
+                <version>${bootique.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.16</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.derby</groupId>
-                <artifactId>derby</artifactId>
-                <version>10.14.2.0</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgres.driver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
         <dependency>
-            <groupId>io.bootique</groupId>
-            <artifactId>bootique</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.bootique.cayenne</groupId>
-            <artifactId>bootique-cayenne</artifactId>
+            <artifactId>bootique-cayenne42</artifactId>
         </dependency>
         <dependency>
             <groupId>io.bootique.jdbc</groupId>
@@ -59,24 +48,64 @@
             <groupId>io.bootique.logback</groupId>
             <artifactId>bootique-logback</artifactId>
         </dependency>
-
-        <!--DB drivers-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
+            <groupId>io.bootique</groupId>
+            <artifactId>bootique-junit5</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <createDependencyReducedPom>true</createDependencyReducedPom>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${main.class}</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

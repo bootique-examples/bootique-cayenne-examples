@@ -1,6 +1,6 @@
-package io.bootique.cayenne.demo;
+package io.bootique.examples.cayenne;
 
-import io.bootique.cayenne.demo.model.Article;
+import io.bootique.examples.cayenne.model.Article;
 import org.apache.cayenne.Persistent;
 import org.apache.cayenne.annotation.PostPersist;
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ public class PostPersistListener {
 
     @PostPersist(Article.class)
     void postAdd(Persistent object) {
-        // do something
-        LOGGER.info("NEW ARTICLE {} ", object);
+        LOGGER.info("new article {} ", object);
     }
 }

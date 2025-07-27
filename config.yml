@@ -1,0 +1,8 @@
+cayenne:
+  createSchema: true
+
+jdbc:
+  postgres:
+    jdbcUrl: jdbc:postgresql://localhost:15433/postgres
+    username: postgres
+    password: test
