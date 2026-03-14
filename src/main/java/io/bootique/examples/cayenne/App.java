@@ -25,12 +25,12 @@ public class App implements BQModule {
         CayenneModule.extend(binder)
 
                 // non-default Cayenne project name requires an explicit declaration
-                .addProject("cayenne-myproject.xml")
+                .addLocation("classpath:cayenne-myproject.xml")
 
                 // basic Cayenne runtime customizations supported directly by Bootique
                 .addListener(PostPersistListener.class)
                 .addQueryFilter(OnQueryFilter.class)
-                .addSyncFilter(OnSyncFilter.class)
+                .addSyncFilter(OnSyncFilter.class, false)
 
                 // or you can customize Cayenne runtime via Cayenne modules
                 .addModule(cayenneBinder -> ServerModule.setSnapshotCacheSize(cayenneBinder, 100));
