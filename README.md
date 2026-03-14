@@ -1,11 +1,12 @@
 [![verify](https://github.com/bootique-examples/bootique-cayenne-examples/actions/workflows/verify.yml/badge.svg)](https://github.com/bootique-examples/bootique-cayenne-examples/actions/workflows/verify.yml)
 
-# Bootique 3.x Apache Cayenne Examples
+# Bootique 4.x Apache Cayenne Examples
 
 This is an example [Bootique](http://bootique.io) Cayenne app.
 
 Different Git branches contain example code for different versions of Bootique:
 
+* [4.x](https://github.com/bootique-examples/bootique-cayenne-examples/tree/4.x)
 * [3.x](https://github.com/bootique-examples/bootique-cayenne-examples/tree/3.x)
 * [2.x](https://github.com/bootique-examples/bootique-cayenne-examples/tree/2.x)
 * [1.x](https://github.com/bootique-examples/bootique-cayenne-examples/tree/1.x)
@@ -16,7 +17,7 @@ Different Git branches contain example code for different versions of Bootique:
 To build and run the project, ensure you have the following installed on your machine:
 
 * Docker
-* Java 11 or newer
+* Java 21 or newer
 * Maven
 
 and then follow these steps:
@@ -47,12 +48,12 @@ mvn clean package
 
 The following command prints a help message with supported options:
 ```bash  
-java -jar target/bootique-cayenne-examples-3.0.jar
+java -jar target/bootique-cayenne-examples-4.0.jar
 ```
 
 ```  
 NAME
-      bootique-cayenne-examples-3.0.jar
+      bootique-cayenne-examples-4.0.jar
 
 OPTIONS
       --config=yaml_location
@@ -79,11 +80,11 @@ and the full name should be used to avoid ambiguity.
 Run the `-i` (or `--insert`) command to create some sample data in the DB. DB location and login credential are
 specified in the provided `config.yml`.
 ```bash
-java -jar target/bootique-cayenne-examples-3.0.jar --config config.yml -i
+java -jar target/bootique-cayenne-examples-4.0.jar --config config.yml -i
 ```
 
 Run the `--count` command to display the data inserted in the previous step (
 
 ```bash    
-java -jar target/bootique-cayenne-examples-3.0.jar --config config.yml --count
+java -jar target/bootique-cayenne-examples-4.0.jar --config config.yml --count
 ```
